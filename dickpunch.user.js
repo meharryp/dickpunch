@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         DickPunch
 // @namespace    http://meharryp.xyz
-// @version      1.0.1
+// @version      1.0.1.1
 // @description  A literal dick waving contest
 // @author       You
 // @require      https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js
