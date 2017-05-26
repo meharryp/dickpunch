@@ -1,12 +1,13 @@
 // ==UserScript==
 // @name         DickPunch
 // @namespace    http://meharryp.xyz
-// @version      1.0
+// @version      1.0.1
 // @description  A literal dick waving contest
 // @author       You
 // @require      https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js
 // @match        *://facepunch.com/*
 // @grant        none
+// @downloadURL  https://raw.githubusercontent.com/meharryp/dickpunch/master/dickpunch.user.js
 // ==/UserScript==
 
 (function() {
@@ -18,13 +19,8 @@
             let match1 = text.match("([0-9,]+.\\w)\\s.");
             let match2 = text.match("([a-zA-Z].+\\w[0-9])");
 
-            console.log(match1);
-            console.log(match2);
             if (match1 && match2){
-                console.log("match");
                 let postCount = match1[1].replace(",", "");
-                console.log(postCount);
-
                 let dickSize = Math.floor(postCount / 500);
                 let joinDate = match2[0];
 
