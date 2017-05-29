@@ -5,35 +5,27 @@
 // @description  A literal dick waving contest
 // @author       You
 // @require      https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js
-// @match        *://facepunch.com/*
+// @match        *://facepunch.com/showthread.php?t=*
 // @grant        none
 // @downloadURL  https://raw.githubusercontent.com/meharryp/dickpunch/master/dickpunch.user.js
 // ==/UserScript==
+
+function Square(SqX, SqY, SqW, SqH, SqCol, SqPos) {
+    return "<rect style=\"fill:"+SqCol+";\"x=\""+SqX+"\" y=\""+SqY+"\" width=\""+SqW+"\" height=\""+SqH+"\"><title>"+SqPos+" Posts</title></rect>";
+}
 
 (function() {
     'use strict';
 
     $(document).ready(function(){
         $("div[id=\"userstats\"]").each(function(i){
-            let text = $(this).html();
-            let match1 = text.match("([0-9,]+.\\w)\\s.");
-            let match2 = text.match("([a-zA-Z].+\\w[0-9])");
-            let cockHTML = "";
-
-            if (match1 && match2){
-                let postCount = match1[1].replace(",", "");
-                let dickSize = Math.floor(postCount / 500);
-                let joinDate = match2[0];
-
-                cockHTML = `${joinDate}<br><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAPCAYAAADd/14OAAAA0ElEQVQokVWR0ZHFIAwDV/33FqgAU4l0H4bkXWY8gC3WMiFB/HwJenPJrYl8BziCEAXEP0giUAQRWCLnSgALWSiknmRPp4a9RlJPvJ5kjWQPd0y3sIa9nvR+OmskNXrd015PyGrhoTZ9D6eGU/MNfFu94nlEh1jTXiOkhl3tyXVa1qWei+3xkH4LNXK9X88IfFu7nqbu6eM9kiLJAB9xPfHPpNcKwgg+wh5OPfn2HRJGUrLPQHv2egc8L3BbI/TR3vfr1nBE/YvhJAxcgjvX9T8A1ZHotZ7XQQAAAABJRU5ErkJggg==" border="0" alt="" title="${match1[1]} Posts"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAPCAYAAAAlH6X5AAAAMklEQVQImTXLsRHAIAwEMHn/3SATAJP4U3A06iRSQBFZ43Fm6zUie7acrxVN3nBvSqgfC1Ue/3J6nsQAAAAASUVORK5CYII=" style="width:${dickSize}px;height:15px" border="0" alt="" title="${match1[1]} Posts"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAPCAYAAAA2yOUNAAAAtElEQVQokXWSy3EAIQxDpf57AyoAKtHLwct+MokuzFiWJQwCrAsg24pkkO66bGMrOuRqsHokpwSSMjvsnqwGe4TZyexkNlgjthBrhDWS2YrYPdVQE21Tk1aDWcWsTgl72D2yo2OTUlLkCLuXlSSxR54MlS2rIV2hTxNn2mxILovaiUEWa0QysvCL1APr+IJ8FgiYb+O/sHi2bp0neBU/uC2Epdvi9/mn8iKPCBnh1438+QHIP2Tq2GHoTHCwAAAAAElFTkSuQmCC" border="0" alt="" title="${match1[1]} Posts">`;
-            } else if (!match1 && match2){
-                let postCount = "some";
-                let dickSize = 0;
-                let joinDate = match2[0];
-                cockHTML = `${joinDate}<br><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAPCAYAAADd/14OAAAA0ElEQVQokVWR0ZHFIAwDV/33FqgAU4l0H4bkXWY8gC3WMiFB/HwJenPJrYl8BziCEAXEP0giUAQRWCLnSgALWSiknmRPp4a9RlJPvJ5kjWQPd0y3sIa9nvR+OmskNXrd015PyGrhoTZ9D6eGU/MNfFu94nlEh1jTXiOkhl3tyXVa1qWei+3xkH4LNXK9X88IfFu7nqbu6eM9kiLJAB9xPfHPpNcKwgg+wh5OPfn2HRJGUrLPQHv2egc8L3BbI/TR3vfr1nBE/YvhJAxcgjvX9T8A1ZHotZ7XQQAAAABJRU5ErkJggg==" border="0" alt="" title="Some Posts"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAPCAYAAAA2yOUNAAAAtElEQVQokXWSy3EAIQxDpf57AyoAKtHLwct+MokuzFiWJQwCrAsg24pkkO66bGMrOuRqsHokpwSSMjvsnqwGe4TZyexkNlgjthBrhDWS2YrYPdVQE21Tk1aDWcWsTgl72D2yo2OTUlLkCLuXlSSxR54MlS2rIV2hTxNn2mxILovaiUEWa0QysvCL1APr+IJ8FgiYb+O/sHi2bp0neBU/uC2Epdvi9/mn8iKPCBnh1438+QHIP2Tq2GHoTHCwAAAAAElFTkSuQmCC" border="0" alt="" title="Some Posts">`;
-            }
-
-            $(this).html(cockHTML);
+            let Text = $(this).html();
+            let PostCount = Text.match("([0-9,]+.\\w|[0-9]+)\\s.")[1].replace(",", "");
+            let JoinDate = Text.match("([a-zA-Z].+\\w[0-9])")[0];
+            let ColourCock = "#fedecf";
+            let DickSize = Math.floor(PostCount / 500);
+            let CockHTML = `${JoinDate}<br><svg height="16" width="${24+DickSize}">${Square(0,3,12+DickSize,7.5,ColourCock,PostCount)+Square(1,10,8,4.5,ColourCock,PostCount)+Square(11+DickSize,1.5,6,7,ColourCock,PostCount)+Square(15+DickSize,1.5,4,5,ColourCock,PostCount)}<path stroke="black" d="M0 3h${11+DickSize} M${11+DickSize} 2h4 M${15+DickSize} 1h2 M${17+DickSize} 2h2 M${19.5+DickSize} 2.5v3 M${18+DickSize} 6h1 M${17+DickSize} 7h1 M${15+DickSize} 8h2 M${12+DickSize} 9h3 M8 10h${4+DickSize} M9.5 10v3.5 M8 14h1 M2 15h6 M1 14h1 M0.5 9.5v4" style="stroke:black;stroke-width:1;stroke-linejoin:miter;" shape-rendering="crispEdges">Sorry, your browser does not support inline SVG.</svg>`;
+            $(this).html(CockHTML);
         });
     });
 })();
